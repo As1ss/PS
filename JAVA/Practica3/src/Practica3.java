@@ -16,19 +16,18 @@ public class Practica3 {
 		//Guardamos el comando que vamos a ejecutar para guardar el resultado en un fichero
 		commando = "tasklist /svc /fi \"imagename eq svchost.exe\"";
 
-		//Try catch para controlar las excepciones
 		
+		//Try catch para controlar las excepciones
 		try {
+			
 			//Inicializamos el printwritter creando dentro de el un fileoutput para guardar
 			//el resultado de la ejecucion del comando
-			
 			writer = new PrintWriter(new FileOutputStream("SVCHOST.TXT"));
-			//Ejecutamos el comando y obtenemos el proceso
 			
+			//Ejecutamos el comando y obtenemos el proceso
 			p = Runtime.getRuntime().exec(commando);
 			
 			//Inicializamos un reader para leer todas las lineas del resultado
-			
 			reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String line;
 
