@@ -15,6 +15,7 @@ public class Main {
 		
 		
 		hilonMusk.join();
+		hilon.join();
 		
 		
 

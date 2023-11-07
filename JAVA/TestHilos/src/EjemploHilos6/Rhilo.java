@@ -7,6 +7,7 @@ public class Rhilo implements Runnable {
 
 	@Override
 	public void run() {
+		
 		// Crea una instancia de la clase Random
 		Random random = new Random();
 		// Genera un número aleatorio entre 1 y 10 (ambos inclusive)
