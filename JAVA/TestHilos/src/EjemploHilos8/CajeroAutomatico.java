@@ -4,11 +4,15 @@ public class CajeroAutomatico implements Runnable {
 
 	int saldoInicial;
 	private int saldoActual;
+	
+	public CajeroAutomatico() {
+		saldoInicial = 1000;
+		saldoActual = saldoInicial;
+	}
 
 	@Override
 	public void run() {
-		saldoInicial = 1000;
-		saldoActual = saldoInicial;
+		
 
 	}
 
