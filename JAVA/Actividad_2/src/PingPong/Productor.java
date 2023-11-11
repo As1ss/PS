@@ -2,28 +2,28 @@ package PingPong;
 
 public class Productor extends Thread {
 	private Cola cola;
-	private String cadenaSgte = " PING ";
+	private String cadena;
 
-	public Productor(Cola c, String cadena) {
+	public Productor(Cola c, String cadenaInput) {
 		cola = c;
-		this.cadenaSgte = cadena;
+		this.cadena = cadenaInput;
 	}
 
 	@Override
 	public void run() {
 		for (int i = 0; i < 10; i++) {
-			cola.put(cadenaSgte);
-			if (cadenaSgte == " PING ") {
-				cadenaSgte = " PONG ";
+			if (cadena == " PING ") {
+				cadena = " PONG ";
+			} else {
+				cadena = " PING ";
 			}
-			else {
-				cadenaSgte = " PING ";
-			}
-			try {
-				sleep(100);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			cola.put(cadena);
+		}
+
+		try {
+			sleep(100);
+		} catch (Exception e) {
+			System.err.println("Error de hilo.");
 		}
 	}
 }

@@ -2,7 +2,7 @@ package PingPong;
 
 public class Cola {
 	private String cadena;
-	private boolean disponible = false; //Inicialmente la colta está vacía
+	private boolean disponible = false; 
 	
 	
 	public synchronized String get() {
@@ -11,27 +11,25 @@ public class Cola {
 				wait();
 				
 			}catch (InterruptedException e) {
-				
+				System.err.println("Error de hilo.");
 			}
-			
-			
 		}
 		disponible=false;
-		notifyAll();
+		notify();
 		return cadena;
 		
 		
 	}
-	public synchronized void put(String valor) {
+	public synchronized void put(String cadenaProductor) {
 		while (disponible==true) {
 			try {
 				wait();
 			} catch (Exception e) {
-				
+				System.err.println("Error de hilo.");
 			}
 		}
-		cadena = valor;
 		disponible = true;
-		notifyAll();
+		cadena = cadenaProductor;
+		notify();
 	}
 }

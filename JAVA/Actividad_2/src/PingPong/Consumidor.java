@@ -1,21 +1,22 @@
 package PingPong;
 
-public class Consumidor extends Thread{
+public class Consumidor extends Thread {
 	private Cola cola;
 	private String cadena;
 
-	public Consumidor(Cola c, String cadena) {
-		this.cola=c;
-		this.cadena=cadena;
-	}
-	
-	@Override
-	public void run() {
-		String cadena="";
-		for (int i = 0;i<10;i++) {
-			cadena=cola.get();
-			System.out.println(cadena);
-		}
+	public Consumidor(Cola c) {
+		this.cola = c;
+		cadena = "";
+
 	}
 
+	@Override
+	public void run() {
+		for (int i = 0; i < 10; i++) {
+			this.cadena = cola.get();
+			System.out.println(cadena);
+
+		}
+
+	}
 }
