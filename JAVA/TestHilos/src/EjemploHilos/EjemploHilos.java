@@ -1,20 +1,20 @@
 package EjemploHilos;
 
+import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
+
 public class EjemploHilos {
 
-	static Runtime r;
-	static Process p;
+	
 	public static void main(String[] args) {
-		r = Runtime.getRuntime();
-		
-		try {
-			p = r.exec("NOTEPAD");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	Runtime r = Runtime.getRuntime();
+	String comando = "NOTEPAD";
+	Process p ;
 
+	try {
+		p = r.exec(comando);
+	} catch (IOException e) {
+		e.printStackTrace();
 	}
-
+	}
 }
