@@ -16,7 +16,7 @@ public class Hilito extends Thread {
 			System.out.println("Nombre: " + nombre + 
 					" Contador: " + i);
 		}
-		
+		System.out.println("Hilo "+Thread.currentThread().getName()+" finalizado");
 	}
 	
 }

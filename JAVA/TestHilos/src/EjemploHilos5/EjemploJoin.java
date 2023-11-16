@@ -20,7 +20,7 @@ public class EjemploJoin {
 		hilo1.start();
 		hilo2.start();
 		hilo3.start();
-		System.out.println("HIlos principales han finalizado");
+	
 
 		/*
 		 * Por otro lado, tendremos el programa principal que hace uso de este hilo
@@ -29,13 +29,13 @@ public class EjemploJoin {
 		 */
 
 		try {
-			System.out.println("HILOS JOIN HAN EMPEZADO");
+			
 			hilo1.join();
-			System.out.println("HILO 1 JOIN HA FINALIZADO");
+			
 			hilo2.join();
-			System.out.println("HILO 2 JOIN HA FINALIZADO");
+			
 			hilo3.join();
-			System.out.println("HILO 3 JOIN HA FINALIZADO");
+			
 			
 			System.out.println("Hilos han finalizado");
 		} catch (Exception e) {

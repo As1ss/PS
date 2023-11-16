@@ -1,27 +1,25 @@
 package EjemploHilos8;
 
 public class CajeroAutomatico implements Runnable {
+	CuentaBancaria cb;
+	String nombre;
+	int cantidad;
 
-	int saldoInicial;
-	private int saldoActual;
-	
-	public CajeroAutomatico() {
-		saldoInicial = 1000;
-		saldoActual = saldoInicial;
+	public CajeroAutomatico(CuentaBancaria cb, String nombre, int cantidad) {
+
+		this.cb = cb;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
 	}
 
 	@Override
 	public void run() {
 		
+		for (int i=0;i<5;i++) {
+			cb.retirarDinero(cantidad);
+			System.out.println("Hilo "+this.nombre+ " está intentando retirar dinero ");
+		}
 
+		
 	}
-
-	public int getSaldoActual() {
-		return saldoActual;
-	}
-
-	public void ingresarSaldo(int suma) {
-		saldoActual += suma;
-	}
-
 }
