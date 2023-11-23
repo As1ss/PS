@@ -4,8 +4,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		CuentaBancaria cb = new CuentaBancaria();
-		CajeroAutomatico maria = new CajeroAutomatico(cb,"Maria",20);
-		CajeroAutomatico pepe = new CajeroAutomatico(cb,"Pepe",20);
+		CajeroAutomatico maria = new CajeroAutomatico(cb,"Maria",200);
+		CajeroAutomatico pepe = new CajeroAutomatico(cb,"Pepe",200);
 		
 		Thread hilo = new Thread(maria);
 		Thread hilo2 = new Thread(pepe);

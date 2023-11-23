@@ -17,8 +17,9 @@ public class CajeroAutomatico implements Runnable {
 		
 		for (int i=0;i<5;i++) {
 			cb.retirarDinero(cantidad);
-			System.out.println("Hilo "+this.nombre+ " está intentando retirar dinero ");
+			System.err.println("Persona: "+this.nombre+ " está intentando retirar dinero.");
 		}
+		
 
 		
 	}

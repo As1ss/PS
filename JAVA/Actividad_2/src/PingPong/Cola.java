@@ -2,26 +2,25 @@ package PingPong;
 
 public class Cola {
 	private String cadena;
-	private boolean disponible = false; 
-	
-	
+	private boolean disponible = false;
+
 	public synchronized String get() {
-		while(disponible==false) {
+		while (disponible == false) {
 			try {
 				wait();
-				
-			}catch (InterruptedException e) {
+
+			} catch (InterruptedException e) {
 				System.err.println("Error de hilo.");
 			}
 		}
-		disponible=false;
+		disponible = false;
 		notify();
 		return cadena;
-		
-		
+
 	}
+
 	public synchronized void put(String cadenaProductor) {
-		while (disponible==true) {
+		while (disponible == true) {
 			try {
 				wait();
 			} catch (Exception e) {
