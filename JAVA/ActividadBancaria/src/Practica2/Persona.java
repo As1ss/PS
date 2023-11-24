@@ -20,27 +20,29 @@ public class Persona extends Thread {
 	@Override
 	public void run() {
 
-		while (!isInterrupted()) {
-			int aleatorio = (int) (Math.random() * 500 + 1);
-			if (cb.ingresoDinero(aleatorio)) {
+		while (!isInterrupted()) { //
+			int aleatorio = (int) (Math.random() * 500 + 1); // Generamos ingreso o retiro aleatorio
+			if (cb.ingresoDinero(aleatorio)) { // Si se cumple el ingreso sumamos 1 al contador de ingresos
 				contIngresos++;
 			} else {
-				contFallos++;
-				synchronized (this) {
+				contFallos++; // Si no sumamos 1 al contador de fallos
+				synchronized (this) { // Sincronizamos el bloque para poder utilizar el método wait()
 					try {
 						System.err.println("El usuario " + nombre + " ha fallado en la operación"
 								+ "de ingreso. Intentos restantes: " + contFallos + "/3");
-						wait(5000);
+						wait(5000); // si no se puede realizar la operación hacemos esperar al hilo 5 segundos
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
 			}
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(3000); // Tiempo en milisegundos para alternar entre las operaciones de ingreso o
+									// retiro
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
+			// Misma metodología para los retiros
 			if (cb.retiroDinero(aleatorio)) {
 				contRetiros++;
 			} else {
@@ -55,9 +57,10 @@ public class Persona extends Thread {
 					}
 				}
 			}
-			if (contIngresos == 2 && contRetiros == 2) {
+			if (contIngresos == 2 && contRetiros == 2) { // Si llega el contador de ingresos a 2 y retiros a 2 se
+															// interrumpe el hilo
 				interrupt();
-			} else if (contFallos > 2) {
+			} else if (contFallos >= 3) { // si llega el contador de fallos a 2 , se interrumpe el hilo
 				System.err.println("El usuario " + nombre + " ha superado el límite de intentos de operaciónes. "
 						+ "Intentélo de nuevo mas tarde.");
 				interrupt();
