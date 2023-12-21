@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Servidor {
 
@@ -23,22 +24,81 @@ public class Servidor {
 	            Socket clientSocket = serverSocket.accept();
 	            System.out.println("Cliente conectado desde: " + clientSocket.getInetAddress());
 
-	            // Crear flujos de entrada/salida para comunicarse con el cliente
-	            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	          
 	            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+	            
+	            Runnable hablar = new Runnable() {
+					
+					@Override
+					public void run() {
+						Scanner sc =new Scanner(System.in);
+						
+						
+						while(true) {
+							String mensajeYo = sc.nextLine();
+							  // Responder al cliente
+				            out.println(mensajeYo);
+				            
+				            if (mensajeYo.equalsIgnoreCase("salir")) {
+				            	break;
+				            }
+						}
+					   
+						
+						
+					}
+				};
+				
+				Thread servidor = new Thread(hablar);
+				
+				servidor.start();
 
-	            // Leer la cadena enviada por el cliente
-	            String mensajeCliente = in.readLine();
-	            System.out.println("Mensaje recibido del cliente: " + mensajeCliente);
+				Runnable recibirMensaje = new Runnable() {
+					
+					@Override
+					public void run() {
+						  // Crear flujos de entrada/salida para comunicarse con el cliente
+			          
+			            
+			            try {
+			            	  BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			            	 while(true) {
+							    	
+					                // Leer la cadena enviada por el cliente
+						            String mensajeCliente = in.readLine();
+						            
+						            System.out.println("Mensaje recibido del cliente: " + mensajeCliente);
+						            if(mensajeCliente.equalsIgnoreCase("salir")) {
+						            	  break;
+						            }
+						          
+					            }
+			            	// in.close();
+						} catch (Exception e) {
+							
+						}
+						
+					   
+					    
+						
+					}
+				};
+	        
+				Thread cliente = new Thread(recibirMensaje);
+				cliente.start();
 
-	            // Responder al cliente
-	            out.println("Hasta pronto puto payaso de los cojones.");
+	       
 
+	            
 	            // Cerrar conexiones
-	            in.close();
+	        
+				
+				
 	            out.close();
 	            clientSocket.close();
 	            serverSocket.close();
+	           
+	            
 
 	        } catch (IOException e) {
 	            e.printStackTrace();
