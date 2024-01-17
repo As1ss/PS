@@ -17,7 +17,7 @@ class Practica1_1 {
 	 */
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		if(args.length<2) {
 			System.out.println("Por favor introduzca los dos parámetros");
@@ -26,7 +26,7 @@ class Practica1_1 {
 			URL url;
 			String etiqueta;
 			URLConnection conn;
-			InputStream is;
+			InputStream is = null;
 			BufferedReader br;
 			
 			try {
@@ -35,6 +35,7 @@ class Practica1_1 {
 				conn = url.openConnection();
 				is = conn.getInputStream();
 				br = new BufferedReader(new InputStreamReader(is));
+				
 			
 
 				String linea;
@@ -50,6 +51,11 @@ class Practica1_1 {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+			finally {
+				is.close();
+				
+				
 			}
 		}
 		
