@@ -1,10 +1,9 @@
 package alexis.practica1;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -23,59 +22,55 @@ public class Practica1_2 {
 	
 	//NO SOPORTA OUTPUT? MAL REDACTADO EL EJERCICIO? SOYT UN MONKEY?
 	
-	public static void main(String[] args) {
 
-		try {
-			// Ruta local al archivo HTML
-			String rutaLocal = "file:///C:/Users/As1ss/Desktop/COSAS%20CLASE%20KEK/DAM2T/PS/JAVA/Practica1/Formulario.html";
-
-			// Crear URL
-			URL url = new URL(rutaLocal);
-
-			// Instanciamos un objeto de tipo HttpURLConnection para obtener la conexion al
-			// documento html
-			URLConnection connection = url.openConnection();
-			
-			
-			//Aqui establecemos el metodo para compartir los datos con el formulario
-		
-			connection.setDoOutput(true);
-
-			// Instanciamos un OutputStream para poder tener una comunicacion de salida de
-			// datos con el documento html
-			OutputStream os = connection.getOutputStream();
-
-			// Insantiamos un BufferedWriter para poder enviar un conjunto de caracteres
-			// almacenados en el buffer
-			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(os));
-
-			// Instanciamos un objeto scanner para recibir inputs del usuario
-			// (nombre,apellido)
+		 
+		public static void main(String[] args) {
+	 
 			Scanner sc = new Scanner(System.in);
+	 
+			  String rutaLocal = "file:///D://DAM2T//PS//JAVA//Practica1//Formulario.html";
+			//Cambiar la direccion a la actual del fichero
+			URL url;
+			String etiqueta;
+			URLConnection conn;
+			InputStream is = null;
+			BufferedReader br;
+			/*
+			 * QUEDA HACER QUE LOS INPUT DEL USUARIO SE MUESTREN DENTRO DE LAS ETIQUETAS NOMBRE Y APELLIDOS :S
+			 */
+			try {
+				url = new URL(rutaLocal);
+				
+				conn = url.openConnection();
+				is = conn.getInputStream();
+				br = new BufferedReader(new InputStreamReader(is));
+				String linea;
+				while ((linea=br.readLine()) != null) {
+					
+						System.out.println(linea);
+					
 
-			//Recogemos los inputs del usuario
-			System.out.println("Escribe su nombre por favor");
-			
-			//Aqui añadimos nombre= porque asi le comunicamos por clave valor el nombre a la etiqueta correspondiente
-			String nombre ="nombre="+ sc.nextLine(); 
-			System.out.println("Escriba su apellido por favor");
-			
-			//Aqui añadimos apellido= porque asi le comunicamos por clave valor el apellido a la etiqueta correspondiente
-			String apellido ="&apellido="+ sc.nextLine();
-			
-			
-			br.write(nombre);
-			br.write(apellido);
-			
-			br.close();
-			
-		
-			
+					
+				}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+	
+	 
 		}
-
-	}
-
 }
+
+	 
+	

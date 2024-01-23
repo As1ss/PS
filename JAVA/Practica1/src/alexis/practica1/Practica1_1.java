@@ -35,9 +35,6 @@ class Practica1_1 {
 				conn = url.openConnection();
 				is = conn.getInputStream();
 				br = new BufferedReader(new InputStreamReader(is));
-				
-			
-
 				String linea;
 				while ((linea=br.readLine()) != null) {
 					if(linea.contains(etiqueta)) {
