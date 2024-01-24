@@ -18,59 +18,44 @@ public class Practica1_2 {
 	 * propio, ejecutado en tu propio host (aunque no es obligatorio).
 	 * 
 	 */
-	
-	
-	//NO SOPORTA OUTPUT? MAL REDACTADO EL EJERCICIO? SOYT UN MONKEY?
-	
 
-		 
-		public static void main(String[] args) {
-	 
-			Scanner sc = new Scanner(System.in);
-	 
-			  String rutaLocal = "file:///D://DAM2T//PS//JAVA//Practica1//Formulario.html";
-			//Cambiar la direccion a la actual del fichero
-			URL url;
-			String etiqueta;
-			URLConnection conn;
-			InputStream is = null;
-			BufferedReader br;
-			/*
-			 * QUEDA HACER QUE LOS INPUT DEL USUARIO SE MUESTREN DENTRO DE LAS ETIQUETAS NOMBRE Y APELLIDOS :S
-			 */
+	public static void main(String[] args) {
+
+		
+
+		String rutaLocal = "file:///C:\\Users\\As1ss\\Desktop\\COSAS CLASE KEK\\DAM2T\\PS\\JAVA\\Practica1//Formulario.html";
+		// Cambiar la direccion a la actual del fichero
+		URL url;
+		String etiqueta;
+		URLConnection conn;
+		InputStream is = null;
+		BufferedReader br;
+		// Estos serán las entradas introducidas por los usuarios
+		String nombre = "Alexis";
+		String apellido = "López";
+		try {
+			url = new URL(rutaLocal);
+
+			conn = url.openConnection();
+			is = conn.getInputStream();
+			br = new BufferedReader(new InputStreamReader(is));
+			String linea;
+			while ((linea = br.readLine()) != null) {
+				linea = linea.replace("Nombre:", nombre);
+				linea = linea.replace("Apellido", apellido);
+				System.out.println(linea);
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				url = new URL(rutaLocal);
-				
-				conn = url.openConnection();
-				is = conn.getInputStream();
-				br = new BufferedReader(new InputStreamReader(is));
-				String linea;
-				while ((linea=br.readLine()) != null) {
-					
-						System.out.println(linea);
-					
-
-					
-				}
-
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
+				is.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			finally {
-				try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				
-			}
-	
-	 
 		}
+	}
 }
-
-	 
-	
